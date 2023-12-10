@@ -312,3 +312,38 @@ func showGameParam(difficulty: DifficultyLevel) {
 
 let selectDifficulty = DifficultyLevel.Easy
 showGameParam(difficulty: selectDifficulty)
+
+//9 - Задание: Прогноз погоды по облачности
+// Описание: Создайте систему, которая предоставляет информацию о вероятности осадков на основе уровня облачности.
+// Требования:
+// Перечисление "Облачность»: Создайте перечисление Cloudiness с уровнями: Ясно, Частичная облачность, Облачно, Пасмурно.
+// Вероятность осадков: Укажите вероятность осадков для каждого уровня облачности.
+// Получение прогноза: Реализуйте функционал, который позволяет пользователю узнать вероятность осадков для выбранного уровня облачности.
+// Ожидаемый результат: Пользователь может узнать вероятность осадков, основываясь на текущем уровне облачности.
+
+enum Cloudiness {
+    case Clear, PartlyCloudy, Cloudy, Overcast
+    
+    func getWeatherForecast() -> String {
+        switch self {
+        case .Clear:
+            return "Вероятность осадков: 15%"
+        case .PartlyCloudy:
+            return "Вероятность осадков: 30%"
+        case .Cloudy:
+            return "Вероятность осадков: 60%"
+        case .Overcast:
+            return "Вероятность осадков: 80%"
+        }
+    }
+}
+
+func showWeatherProbability(cloudiness: Cloudiness) {
+    let probability = cloudiness.getWeatherForecast()
+    print("Уровень облачности: \(cloudiness)")
+    print(probability)
+    }
+
+let currentCloudiness = Cloudiness.PartlyCloudy
+showWeatherProbability(cloudiness: currentCloudiness)
+
