@@ -30,13 +30,13 @@ enum Season {
         
         switch self {
         case .Winter:
-           return 0.0
+           return 0
         case .Spring:
-           return 20.0
+           return 20
         case .Summer:
-            return 30.0
+            return 30
         case .Fall:
-            return 15.0
+            return 15
         }
     }
     
@@ -47,3 +47,39 @@ enum Season {
 
 let currentSeason = Season.Fall
 currentSeason.showTemp()
+
+//2 -  Задание: Информация о транспортных средствах
+//Описание: Создайте приложение, которое предоставляет информацию о различных видах транспортных средств, таких как их максимальная скорость.
+//Требования:
+//Перечисление "Транспорт":  Создайте перечисление Transport с различными типами транспортных средств, такими как автомобиль, велосипед, поезд и самолет.
+//Максимальная скорость: Для каждого транспортного средства укажите его максимальную скорость. Используйте ассоциативные значения для этой цели.
+//Вывод информации: Реализуйте функцию, которая выводит максимальную скорость для выбранного транспортного средства.
+//Ожидаемый результат: Пользователь может узнать максимальную скорость любого из указанных транспортных средств.
+
+enum Transport: String {
+    case Car
+    case Bicycle
+    case Train
+    case Airplane
+    
+    var maxSpeedForTransport: Double {
+        switch self {
+        case .Car:
+            return 180.0
+        case .Bicycle:
+            return 80.0
+        case .Train:
+            return 250.0
+        case .Airplane:
+            return 1200.0
+        }
+    }
+    
+    func showMaxSpeed() {
+        print("Максимальная скорость для \(self.rawValue) - \(self.maxSpeedForTransport) км/ч")
+    }
+}
+
+let selectTransportMaxSpeed = Transport.Train
+selectTransportMaxSpeed.showMaxSpeed()
+
