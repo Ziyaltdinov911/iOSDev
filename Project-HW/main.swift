@@ -83,3 +83,39 @@ enum Transport: String {
 let selectTransportMaxSpeed = Transport.Train
 selectTransportMaxSpeed.showMaxSpeed()
 
+//3 -  Задание: Статусы платежей
+// Описание: Создайте систему учета статусов платежей, которая позволяет отслеживать различные этапы обработки платежа.
+// Требования:
+// Перечисление "Статус платежа»: Создайте перечисление PaymentStatus со статусами: Неоплачено, В обработке, Оплачено, Ошибка.
+// Дополнительная информация: Некоторые статусы требуют дополнительной информации. Например, для оплаченного статуса нужна дата оплаты, а для статуса ошибки - сообщение об ошибке. Используйте ассоциативные значения для сохранения этой информации.
+// Вывод информации: Реализуйте функционал, который позволяет пользователю узнать дату оплаты для определенного платежа или причину ошибки.
+// Ожидаемый результат: Пользователь может узнать детали каждого платежа в зависимости от его статуса.
+
+enum PaymentStatus {
+    case Unpaid
+    case Processing
+    case Paid(date: Date)
+    case Error(message: String)
+    
+    func showDetails() {
+        switch self {
+        case .Unpaid:
+            print("Платёж не прошёл. Неоплачено")
+        case .Processing:
+            print("Платёж в обработке")
+        case .Paid(date: let date):
+            let dateFormat = DateFormatter()
+            dateFormat.dateFormat = "yyyy-MM-dd"
+            print("Платёж прошёл. Дата платежа: \(dateFormat.string(from: date))")
+        case .Error(message: let message):
+            print("Платёж не прошёл. \(message)")
+        }
+    }
+}
+
+
+
+let paymentDate = Date()
+let paymentStatus = PaymentStatus.Paid(date: paymentDate)
+paymentStatus.showDetails()
+
