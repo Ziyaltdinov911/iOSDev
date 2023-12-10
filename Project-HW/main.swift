@@ -190,3 +190,46 @@ let herbivoresType = AnimalType.Herbivore
 let insectivoreType = AnimalType.Insectivore
 
 print("Волк: \(getAnimalDiet(type: predatorsType))")
+
+//6 - Задание: Отслеживание статуса заказа в ресторане
+//Описание: Разработайте систему, которая позволяет отслеживать статус приготовления заказа в ресторане.
+//Требования:
+//Перечисление "Статус заказа»: Создайте перечисление OrderStatus со статусами: Принят, Готовится, Готов к подаче, Доставляется.
+//Следующий статус: Реализуйте функционал, который показывает, какой статус будет следующим после текущего.
+//Получение следующего статуса: Пользователь может узнать, какой статус будет следующим для его заказа.
+//Ожидаемый результат: Пользователь может отслеживать, на каком этапе находится его заказ.
+
+enum OrderStatus {
+    case Accepted
+    case BeingPrepared
+    case ReadyForServing
+    case BeingDelivered
+    
+    func nextOrderStatus() -> OrderStatus? {
+        switch self {
+        case .Accepted:
+            return .BeingPrepared
+        case .BeingPrepared:
+            return .ReadyForServing
+        case .ReadyForServing:
+            return .BeingDelivered
+        case .BeingDelivered:
+            return nil
+//            return print("Заказ завершён")
+        }
+    }
+}
+
+func trackOrderStatus(currentStatus: OrderStatus) {
+    print("Текущий статус заказа: \(currentStatus)")
+    if let nextOrderStatus = currentStatus.nextOrderStatus() {
+        print("Следующий статус заказа: \(nextOrderStatus.nextOrderStatus()!)")
+    } else {
+        print("Заказ завершён")
+    }
+}
+
+let currentOrderStatus = OrderStatus.BeingDelivered
+trackOrderStatus(currentStatus: currentOrderStatus)
+
+
