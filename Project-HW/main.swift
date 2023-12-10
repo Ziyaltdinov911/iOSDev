@@ -380,3 +380,47 @@ func showDrinkPrice(drinkType: DrinkType) {
 
 let selectedDrink = DrinkType.Tea
 showDrinkPrice(drinkType: selectedDrink)
+
+// имитация запроса в сеть
+// возможные сбои - сервер не отвечает, отсутствуует подключение к интернету
+// данные получены успешно
+
+enum ResultRequest {
+    case success(String)
+    case failure(String)
+}
+var resultData: [Int: String] = [
+    1: "Данные получены",
+    2: "Отсутствует подключение к интернету",
+    3: "Сервер не отвечает"
+]
+
+let resultKey = resultData.randomElement()?.key
+
+func fetchData(for request: String) -> ResultRequest {
+    guard let keyRequest = resultKey else {
+        return ResultRequest.failure("запрос не отправлен")
+    }
+    
+    switch keyRequest {
+    case 1:
+        return ResultRequest.success(resultData[keyRequest] ?? "")
+    case 2:
+        return ResultRequest.failure(resultData[keyRequest] ?? "")
+    case 3:
+        return ResultRequest.failure(resultData[keyRequest] ?? "")
+    default:
+        return ResultRequest.failure("Ошибка \(resultData[keyRequest] ?? "")")
+        
+    }
+}
+
+let res = fetchData(for: "KAMA911")
+
+switch res {
+case .success(let data):
+    print("Data: \(data)")
+case .failure(let errorMessage):
+    print("Error: \(errorMessage)")
+}
+
