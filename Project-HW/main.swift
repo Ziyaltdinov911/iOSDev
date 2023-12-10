@@ -155,3 +155,38 @@ func showRecomedation(mode: ModesForCam) {
 let selectMode = ModesForCam.Auto
 showRecomedation(mode: selectMode)
 
+//5 - Задание: Диеты животных в зоопарке
+// Описание: Создайте информационную систему о типах животных в зоопарке и их предпочтениях в пище.
+// Требования:
+// Перечисление "Тип животного»: Создайте перечисление AnimalType с типами: Хищник, Травоядное, Насекомое.
+// Диета: Укажите, что ест каждый тип животного.
+// Получение информации о диете: Реализуйте функционал, который позволяет узнать, что ест определенное животное.
+// Ожидаемый результат:  Пользователь может узнать, что ест определенное животное в зоопарке.
+
+enum AnimalType {
+    case Predator
+    case Herbivore
+    case Insectivore
+    
+    func getDiet() -> String {
+        switch self {
+        case .Predator:
+            return "Хищники едят других животных."
+        case .Herbivore:
+            return "Травоядные питаются растениями."
+        case .Insectivore:
+            return "Насекомые питаются другими насекомыми или растениями."
+        }
+    }
+}
+
+func getAnimalDiet(type: AnimalType) -> String {
+    let animalDiet = type.getDiet()
+    return animalDiet
+}
+
+let predatorsType = AnimalType.Predator
+let herbivoresType = AnimalType.Herbivore
+let insectivoreType = AnimalType.Insectivore
+
+print("Волк: \(getAnimalDiet(type: predatorsType))")
