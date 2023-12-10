@@ -278,4 +278,37 @@ func showInfoAboutRoom(room: RoomType) {
 let selectRoomType = RoomType.Luxe
 showInfoAboutRoom(room: selectRoomType)
 
+//8 - Задание: Уровни сложности в игре
+// Описание: Разработайте систему, которая позволяет определить параметры игры на основе выбранного уровня сложности.
+// Требования:
+// Перечисление "Уровень сложности»: Создайте перечисление DifficultyLevel с уровнями: Легкий, Средний, Тяжелый, Эксперт.
+// Параметры игры: Укажите количество врагов и временные ограничения для каждого уровня сложности.
+// Получение параметров: Реализуйте функционал, который позволяет пользователю узнать параметры игры для выбранного уровня сложности.
+// Ожидаемый результат: Пользователь может узнать, сколько врагов и какое временное ограничение установлено для выбранного уровня сложности.
 
+enum DifficultyLevel {
+    case Easy, Medium, Hard, Expert
+    
+    func getGameParam() -> (numOfEnemies: Int, timeLimit: String) {
+        switch self {
+        case .Easy:
+            return (10, "10 мин")
+        case .Medium:
+            return (15, "15 мин")
+        case .Hard:
+            return (20, "20 мин")
+        case .Expert:
+            return (25, "25 мин")
+        }
+    }
+}
+
+func showGameParam(difficulty: DifficultyLevel) {
+    let params = difficulty.getGameParam()
+    print("Уровень сложности: \(difficulty)")
+    print("Количество врагов: \(params.numOfEnemies)")
+    print("Временные ограничения: \(params.timeLimit)")
+}
+
+let selectDifficulty = DifficultyLevel.Easy
+showGameParam(difficulty: selectDifficulty)
