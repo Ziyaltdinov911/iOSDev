@@ -119,3 +119,39 @@ let paymentDate = Date()
 let paymentStatus = PaymentStatus.Paid(date: paymentDate)
 paymentStatus.showDetails()
 
+//4 -  Задание: Рекомендации по режимам камеры
+//Описание: Создайте систему, которая дает рекомендации по использованию различных режимов камеры.
+//Требования:
+//Перечисление "Режим камеры»: Создайте перечисление CameraMode с режимами: Авто, Портрет, Ландшафт, Ночной.
+//Рекомендации: Для каждого режима предоставьте рекомендацию, когда и как лучше его использовать.
+//Получение рекомендации: Реализуйте функционал, который позволяет пользователю получить рекомендацию для выбранного режима камеры.
+//Ожидаемый результат: При выборе определенного режима камеры пользователь получает рекомендацию по его использованию.
+
+enum ModesForCam {
+    case Auto
+    case Portrait
+    case Night
+    case Landscape
+    
+    func giveRecomendation() -> String {
+        switch self {
+        case .Auto:
+            return "Режим Auto подходит для общих условий съемки. Камера сама выберет оптимальные настройки."
+        case .Portrait:
+            return "Режим Portrait идеально подходит для фотографий людей, создавая эффект размытого фона."
+        case .Landscape:
+            return "Режим Landscape рекомендуется для съемки природы и пейзажей, чтобы передать все детали и широту сцены."
+        case .Night:
+            return "Режим Night предназначен для фотографий при недостаточном освещении. Используйте его в темное время суток."
+        }
+    }
+}
+
+func showRecomedation(mode: ModesForCam) {
+    let recomendation = mode.giveRecomendation()
+    print("Вы переключились в режим \(mode). \(mode.giveRecomendation()).")
+}
+
+let selectMode = ModesForCam.Auto
+showRecomedation(mode: selectMode)
+
