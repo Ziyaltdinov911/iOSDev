@@ -232,4 +232,50 @@ func trackOrderStatus(currentStatus: OrderStatus) {
 let currentOrderStatus = OrderStatus.BeingDelivered
 trackOrderStatus(currentStatus: currentOrderStatus)
 
+//7 - Задание: Информация о номерах в отеле
+// Описание: Создайте систему, которая предоставляет информацию о различных типах номеров в отеле.
+// Требования:
+// Перечисление "Тип комнаты»: Создайте перечисление RoomType с типами номеров: Одноместный, Двухместный, Люкс.
+// Информация о комнате: Для каждого типа комнаты укажите его стоимость и количество доступных номеров.
+// Получение информации о комнате: Пользователь может узнать стоимость и количество доступных номеров для выбранного типа комнаты.
+// Ожидаемый результат: Пользователь может узнать детали о различных типах номеров в отеле.
+//
+
+enum RoomType {
+    case Single, Double, Luxe
+    
+    var price: Double {
+        switch self {
+        case .Single:
+            return 5400
+        case .Double:
+            return 6100
+        case .Luxe:
+            return 6900
+        }
+    }
+    
+    var availableRoomsCount: Int {
+        switch self {
+        case .Single:
+            return 47
+        case .Double:
+            return 22
+        case .Luxe:
+            return 19
+        }
+    }
+    
+    func getInfoAboutRoom() -> String {
+        return "Номер: \(self).\nСтоимость: \(price)₽.\nКоличество свободных номеров: \(availableRoomsCount)"
+    }
+}
+
+func showInfoAboutRoom(room: RoomType) {
+    print(room.getInfoAboutRoom())
+}
+
+let selectRoomType = RoomType.Luxe
+showInfoAboutRoom(room: selectRoomType)
+
 
