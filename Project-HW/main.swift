@@ -347,3 +347,36 @@ func showWeatherProbability(cloudiness: Cloudiness) {
 let currentCloudiness = Cloudiness.PartlyCloudy
 showWeatherProbability(cloudiness: currentCloudiness)
 
+//10 - Задание: Цены напитков в автомате
+// Описание: Создайте систему, которая предоставляет информацию о стоимости различных напитков, доступных в автомате.
+// Требования:
+// Перечисление "Тип напитка»: Создайте перечисление DrinkType с напитками: Кофе, Чай, Горячий шоколад, Вода.
+// Стоимость напитка: Укажите стоимость каждого напитка.
+// Получение цены: Реализуйте функционал, который позволяет пользователю узнать стоимость выбранного напитка.
+// Ожидаемый результат: Пользователь может узнать стоимость напитка перед тем, как совершить покупку в автомате.
+
+enum DrinkType {
+    case Coffee, Tea, HotChocolate, Water
+    
+    func getPrice() -> String {
+        switch self {
+        case .Coffee:
+            return "Cтоимость напитка: 220₽"
+        case .Tea:
+            return "Cтоимость напитка: 100₽"
+        case .HotChocolate:
+            return "Cтоимость напитка: 140₽"
+        case .Water:
+            return "Cтоимость напитка: 15₽"
+
+        }
+    }
+}
+
+func showDrinkPrice(drinkType: DrinkType) {
+    let price = drinkType.getPrice()
+    print("Вы выбрали напиток: \(drinkType). \(price)")
+}
+
+let selectedDrink = DrinkType.Tea
+showDrinkPrice(drinkType: selectedDrink)
