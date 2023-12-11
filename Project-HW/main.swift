@@ -58,7 +58,135 @@ enum CarActions {
     }
     
     enum CargoVol {
-        case laod
+        case load
         case unload
+    }
+    
+    
+    case performEngine(Engine)
+    case performWindows(Windows)
+    case performCargoVol(CargoVol)
+}
+
+// Задание 3: Добавление метода для изменения свойств автомобиля
+// Описание: В каждую структуру добавьте метод, который принимает один аргумент типа перечисления и изменяет свойства структуры в соответствии с действием.
+// Требования:
+// Метод должен корректно обрабатывать каждое действие из перечисления.
+// Убедитесь, что метод обновляет свойства структуры соответствующим образом.
+// Подсказки:
+// Внимательно обработайте ситуации, когда действие невозможно выполнить из-за текущего состояния объекта (например, погрузка груза превышает доступный объем).
+// Ожидаемый результат:
+// Метод в каждой структуре, который принимает действие в виде перечисления и модифицирует свойства структуры соответствующим образом.
+// Метод может выводить результат действия в консоль (например, "Двигатель заведён" или "Недостаточно места в багажнике").
+
+extension SportCar {
+    mutating func perform(action: CarActions) {
+        switch action {
+        case .performEngine(let engineAction):
+            switch engineAction {
+            case .start:
+                if !engineRunning {
+                    engineRunning = true
+                    print("Двигатель запущен")
+                } else {
+                    print("Двигатель уже запущен")
+                }
+            case .stop:
+                if engineRunning {
+                    engineRunning = false
+                    print("Двигатель заглушен")
+                } else {
+                    print("Двигатель уже заглушен")
+                }
+            }
+        case .performWindows(let windowsAction):
+            switch windowsAction {
+            case .open:
+                if engineRunning {
+                    if !windowsOpen {
+                        windowsOpen = true
+                        print("Окна открыты")
+                    } else {
+                        print("Окна уже открыты")
+                    }
+                } else {
+                    print("Двигатель выключен, окна нельзя открыть")
+                }
+            case .close:
+                if engineRunning {
+                    if windowsOpen {
+                        windowsOpen = false
+                        print("Окна закрыты")
+                    } else {
+                        print("Окна уже закрыты")
+                    }
+                } else {
+                    print("Двигатель выключен, окна нельзя закрыть")
+                }
+            }
+        case .performCargoVol(let cargoVolAction):
+            switch cargoVolAction {
+            case .load:
+                print("Груз загружен")
+            case .unload:
+                print("Груз выгружен")
+            }
+        }
+    }
+}
+
+extension TrunkCar {
+    mutating func perform(action: CarActions) {
+        switch action {
+        case .performEngine(let engineAction):
+            switch engineAction {
+            case .start:
+                if !engineRunning {
+                    engineRunning = true
+                    print("Двигатель запущен")
+                } else {
+                    print("Двигатель уже запущен")
+                }
+            case .stop:
+                if engineRunning {
+                    engineRunning = false
+                    print("Двигатель заглушен")
+                } else {
+                    print("Двигатель уже заглушен")
+                }
+            }
+        case .performWindows(let windowsAction):
+            switch windowsAction {
+            case .open:
+                if engineRunning {
+                    if !windowsOpen {
+                        windowsOpen = true
+                        print("Окна открыты")
+                    } else {
+                        print("Окна уже открыты")
+                    }
+                } else {
+                    print("Двигатель выключен, окна нельзя открыть")
+                }
+            case .close:
+                if engineRunning {
+                    if windowsOpen {
+                        windowsOpen = false
+                        print("Окна закрыты")
+                    } else {
+                        print("Окна уже закрыты")
+                    }
+                } else {
+                    print("Двигатель выключен, окна нельзя закрыть")
+                }
+            }
+        case .performCargoVol(let cargoVolAction):
+            switch cargoVolAction {
+            case .load:
+                print("Груз загружен")
+            case .unload:
+                print("Груз выгружен")
+            }
+        }
     }
 }
