@@ -214,3 +214,16 @@ ferrari.perform(action: .performCargoVol(.load))
 volvoTruck.perform(action: .performEngine(.start))
 volvoTruck.perform(action: .performCargoVol(.load))
 volvoTruck.perform(action: .performWindows(.open))
+
+// Задание 5: Вывод свойств объектов
+// Описание: Выведите в консоль свойства каждого созданного объекта.
+// Требования:
+// После выполнения действий над объектами, выведите актуальные данные об их свойствах.
+// Подсказки:
+// Можете использовать функцию print в Swift для вывода данных в консоль.
+//
+// Ожидаемый результат:
+// Код, который создает несколько экземпляров каждой структуры и вызывает их методы, передавая различные действия из перечисления.
+
+print("Состояние Ferrari после действий: \(ferrari)")
+print("Состояние Volvo Truck после действий: \(volvoTruck)")
