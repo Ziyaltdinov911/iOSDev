@@ -190,3 +190,27 @@ extension TrunkCar {
         }
     }
 }
+
+// Задание 4: Инициализация и использование структур
+// Описание: Инициализируйте несколько экземпляров каждой структуры и выполните различные действия с ними, используя метод из предыдущего задания.
+// Требования:
+// Создайте различные объекты каждой структуры и примените к ним различные действия из перечисления.
+// Подсказки:
+// Обратите внимание на то, как изменяется состояние объекта после каждого действия и проверьте его, выводя свойства объекта в консоль.
+//
+// Ожидаемый результат:
+// Код, который создает несколько экземпляров каждой структуры и вызывает их методы, передавая различные действия из перечисления.
+
+var ferrari = SportCar(brand: "Ferrari", year: 2022, trunkVolume: 100, engineRunning: false, windowsOpen: false, currentTrunkVolume: 0)
+var volvoTruck = TrunkCar(brand: "Volvo", year: 2022, cargoVolume: 500, engineRunning: false, windowsOpen: false, currentCargoVolume: 0)
+
+print("Начальное состояние Ferrari: \(ferrari)")
+print("Начальное состояние Volvo Truck: \(volvoTruck)")
+
+ferrari.perform(action: .performEngine(.start))
+ferrari.perform(action: .performWindows(.open))
+ferrari.perform(action: .performCargoVol(.load))
+
+volvoTruck.perform(action: .performEngine(.start))
+volvoTruck.perform(action: .performCargoVol(.load))
+volvoTruck.perform(action: .performWindows(.open))
