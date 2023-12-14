@@ -93,3 +93,25 @@ let trunckCar = TrunkCar(brand: "FAW", model: "J6", year: 2014, cargoCapacity: 1
 
 let sportCar = SportCar(brand: "Audi", model: "A4", year: 2009, maxSpeed: 250, overlock: 6.7)
 
+// Задание 3: Расширение enum с действиями
+// Описание: Возьмите перечисление (enum) с действиями над автомобилем из прошлого задания и добавьте действия, специфичные для "TrunkCar" и "SportCar".
+// Требования:
+// Добавьте в перечисление дополнительные действия для каждого подкласса.
+//
+// Подсказки:
+// Подумайте, какие действия могут быть особенно релевантны для грузовых и спортивных автомобилей.
+//
+// Ожидаемый результат:
+// Перечисление CarAction из предыдущего задания, дополненное действиями, специфичными для TrunkCar и SportCar.
+
+enum ActionForCar {
+    case start
+    case stop
+    case loadCargo(Double)
+    case uploadCargo(Double)
+    case overlock(Double)
+    case braking
+}
+
+let actionForTrunckCar: ActionForCar = .loadCargo(11_000)
+let actionForSportCar: ActionForCar = .overlock(5.3)
