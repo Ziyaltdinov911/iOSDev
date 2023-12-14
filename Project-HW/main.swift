@@ -33,6 +33,23 @@ class Car {
     func movingCar() {
         print("Машина \(brand) \(model) \(year) едет к тебе")
     }
+    
+    func loadCargo(weight: Double) {
+        
+    }
+    
+    func uploadCargo(weight: Double) {
+        
+    }
+    
+    func overlocking() {
+        
+    }
+    
+    func braking() {
+        
+    }
+    
 }
 
 let aboutCar = Car(brand: "Jeep", model: "Grand Cheeroke", year: 2008)
@@ -49,23 +66,23 @@ aboutCar.movingCar()
 //
 // Ожидаемый результат:
 // Два класса, каждый из которых наследуется от Car и имеет дополнительные свойства, характерные для каждого типа автомобиля (например, максимальная грузоподъемность для TrunkCar и максимальная скорость для SportCar).
- 
+//
 class TrunkCar: Car {
     var cargoCapacity: Double
     var cargoType: String
-    
+
     init(brand: String, model: String, year: Int, cargoCapacity: Double, cargoType: String) {
         self.cargoCapacity = cargoCapacity
         self.cargoType = cargoType
         super.init(brand: brand, model: model, year: year)
     }
-    
-    
-    func loadCargo(weight: Double) {
+
+
+   override func loadCargo(weight: Double) {
         print("Груз загружен")
     }
-    
-    func uploadCargo(weight: Double) {
+
+   override func uploadCargo(weight: Double) {
         print("Груз выгружен")
     }
 }
@@ -73,20 +90,21 @@ class TrunkCar: Car {
 class SportCar: Car {
     var maxSpeed: Double
     var overlock: Double
-    
+
     init(brand: String, model: String, year: Int, maxSpeed: Double, overlock: Double) {
         self.maxSpeed = maxSpeed
         self.overlock = overlock
         super.init(brand: brand, model: model, year: year)
     }
-    
-    func overlocking() {
+
+    override func overlocking() {
         print("\(brand) \(model) разгоняется.")
     }
-    
-    func braking() {
+
+   override func braking() {
         print("\(brand) \(model) тормозит.")
     }
+
 }
 
 let trunckCar = TrunkCar(brand: "FAW", model: "J6", year: 2014, cargoCapacity: 12_000, cargoType: "Diesel car")
@@ -115,3 +133,51 @@ enum ActionForCar {
 
 let actionForTrunckCar: ActionForCar = .loadCargo(11_000)
 let actionForSportCar: ActionForCar = .overlock(5.3)
+
+// Задание 4: Переопределение методов в подклассах
+// Описание: Переопределите метод действия в каждом подклассе, чтобы он соответствовал специфике объекта.
+// Требования:
+// Удостоверьтесь, что метод действия в каждом подклассе адекватно отражает специфические действия для этого класса.
+// Подсказки:
+// Используйте ключевое слово override для переопределения методов в подклассах.
+//
+// Ожидаемый результат:
+// Метод действия в TrunkCar и SportCar, каждый из которых реализует действия, связанные со специфическими свойствами этих подклассов.
+
+class TrunkCar2: Car {
+    var cargoCapacity: Double
+    var cargoType: String
+    
+    init(brand: String, model: String, year: Int, cargoCapacity: Double, cargoType: String) {
+        self.cargoCapacity = cargoCapacity
+        self.cargoType = cargoType
+        super.init(brand: brand, model: model, year: year)
+    }
+    
+    override func loadCargo(weight: Double) {
+        print("Груз загружен на \(weight) кг.")
+    }
+    
+    override func uploadCargo(weight: Double) {
+        print("Груз выгружен \(weight) кг.")
+    }
+}
+
+class SportCar2: Car {
+    var maxSpeed: Double
+    var overlock: Double
+    
+    init(brand: String, model: String, year: Int, maxSpeed: Double, overlock: Double) {
+        self.maxSpeed = maxSpeed
+        self.overlock = overlock
+        super.init(brand: brand, model: model, year: year)
+    }
+    
+    override func overlocking() {
+        print("\(brand) \(model) разгоняется.")
+    }
+    
+    override func braking() {
+        print("\(brand) \(model) тормозит.")
+    }
+}
