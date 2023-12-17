@@ -68,3 +68,130 @@ let fighter2 = Mag()
 
 startFighter1(fighter: fighter1)
 startFighter2(fighter: fighter2)
+
+//MARK: - Task 2. Разработка и тестирование иерархии классов животных.
+//Задача 2: Разработка и тестирование иерархии классов животных
+//
+//Описание задачи:
+//
+//Вам предоставлена задача создания иерархии классов животных для моделирования кошек и собак. Класс Animal является базовым, а классы Cat и Dog представляют собой конкретные типы животных.
+//
+//Требования:
+//
+//Базовый класс Animal:
+//
+//Содержит свойство name (имя животного).
+//Имеет инициализатор required init(name: String).
+//Объявляет вычисляемое свойство type, возвращающее строковое представление типа животного (кот, собака или животное по умолчанию).
+//Реализует метод sleep(), который возвращает строку, представляющую состояние сна животного.
+//Класс Cat:
+//
+//Наследуется от Animal.
+//Содержит свойство sound (звук, который издает кот).
+//Имеет инициализатор init(name: String, sound: String).
+//Переопределяет метод sleep() для добавления информации о типе животного и его состоянии сна.
+//Объявляет метод play(), выводящий сообщение о том, что кот играет.
+//Класс Dog:
+//
+//Наследуется от Animal.
+//Содержит свойство sound (звук, который издает собака).
+//Имеет инициализатор init(name: String, sound: String).
+//Переопределяет метод sleep() для добавления информации о типе животного и его состоянии сна.
+//Объявляет метод play(), выводящий сообщение о том, что собака играет.
+//Тестирование:
+//
+//Создайте экземпляры классов Cat и Dog с различными характеристиками (имя и звук).
+//Выведите информацию о типе животного с использованием свойства type.
+//Проверьте метод sleep(), убедившись, что он корректно отображает тип и состояние сна животного.
+//Вызовите метод play() для каждого класса и убедитесь, что соответствующее сообщение выводится.
+//Дополнительно:
+//
+//Создайте еще один экземпляр класса Cat без указания звука, чтобы проверить, что по умолчанию устанавливается "Мяу".
+//Выведите информацию о новом экземпляре и убедитесь, что звук корректно установлен.
+//Завершение программы:
+//
+//После завершения тестирования выведите сообщения о свойствах звуков для кота и собаки.
+//Примечание:
+//
+//Поддерживайте код в чистом и читаемом виде, следуя принципам объектно-ориентированного программирования.
+
+class Animal {
+    let name: String
+    
+    required init(name: String) {
+        self.name = name
+    }
+    
+    var type: String {
+        return "Животное"
+    }
+    
+    func sleep() -> String {
+        return "\(type) \(name) спит"
+    }
+}
+
+class Cat: Animal {
+    let sound: String
+    
+    init(name: String, sound: String = "Мяу") {
+        self.sound = sound
+        super.init(name: name)
+    }
+    
+    required init(name: String) {
+        self.sound = "Мяу"
+        super.init(name: name)
+    }
+    
+    override var type: String {
+        return "Кот"
+    }
+    
+    override func sleep() -> String {
+        return "\(super.sleep()) и мурлычет"
+    }
+    
+    func play() -> String {
+        return "\(type) \(name) играет"
+    }
+}
+
+class Dog: Animal {
+    let sound: String
+    
+    init(name: String, sound: String = "Гав") {
+        self.sound = sound
+        super.init(name: name)
+    }
+    
+    required init(name: String) {
+        self.sound = "Гав"
+        super.init(name: name)
+    }
+    
+    override var type: String {
+        return "Собака"
+    }
+    
+    override func sleep() -> String {
+        return "\(super.sleep()) и храпит"
+    }
+    
+    func play() -> String {
+        return "\(type) \(name) играет"
+    }
+}
+
+let cat1 = Cat(name: "Барсик", sound: "Мур")
+let dog1 = Dog(name: "Бобик", sound: "Гуф")
+
+let cat2 = Cat(name: "Мурзик")
+let dog2 = Dog(name: "Шарик")
+
+print("\(cat1.type):\n\(cat1.sleep())\n\(cat1.play())\n")
+print("\(dog1.type):\n\(dog1.sleep())\n\(dog1.play())\n")
+
+print("\(cat2.type):\n\(cat2.sleep())\n\(cat2.play())\n")
+print("\(dog2.type):\n\(dog2.sleep())\n\(dog2.play())\n")
+
