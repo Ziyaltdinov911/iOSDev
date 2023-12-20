@@ -195,3 +195,127 @@ print("\(dog1.type):\n\(dog1.sleep())\n\(dog1.play())\n")
 print("\(cat2.type):\n\(cat2.sleep())\n\(cat2.play())\n")
 print("\(dog2.type):\n\(dog2.sleep())\n\(dog2.play())\n")
 
+//MARK: - Task 3
+
+//после того как выполните 1 - Задание, измените вашу игру Бойцовский клуб добавив к ним протоколы ->
+//
+//Задача 3: Разработка и использование протоколов для представления людей и бойцов в игре
+//
+//Описание задачи:
+//
+//Вам предоставлена задача разработать протоколы для представления людей и бойцов в игровой системе. Каждый боец должен обладать уникальными характеристиками и методами. Ваша задача - определить протоколы, расширения и структуры, которые позволят корректно представить эти концепции.
+//
+//Требования:
+//
+//Протокол PeopleProtocol:
+//
+//Содержит свойства name (имя) и _strength (сила) с геттерами и сеттерами.
+//Определяет метод startTrainingFight(), выводящий сообщение о начале тренировки.
+//Протокол FighterProtocol:
+//
+//Требует реализации свойства typeFighter (тип бойца) типа TypeFighter.
+//Протокол AttackProtocol:
+//
+//Наследуется от PeopleProtocol.
+//Определяет метод attacking() -> Int, возвращающий урон бойца.
+//Перечисление TypeFighter:
+//
+//Структура People:
+//
+//Реализует протокол PeopleProtocol.
+//Содержит свойства name и _strength.
+//Структуры Warrior и Mag:
+//
+//Реализуют протоколы FighterProtocol и AttackProtocol.
+//Содержат свойства name и _strength.
+//Тестирование:
+//
+//Создайте экземпляры структур People, Warrior и Mag с различными характеристиками.
+//Выведите информацию о каждом созданном объекте.
+//Проверьте работу методов startTrainingFight() и attacking() для объектов, где это применимо.
+//Выведите информацию о типе бойцов и уроне, который они могут нанести.
+//Примечание:
+//
+//Обеспечьте, чтобы реализация протоколов и структур была логичной и соответствовала задаче.
+//Поддерживайте код в чистом и читаемом виде, следуя принципам объектно-ориентированного программирования.
+
+protocol PeopleProtocol {
+    var name: String { get set }
+    var _strength: Int { get set }
+
+    func startTrainingFight()
+}
+
+protocol FighterProtocol {
+    var typeFighter: TypeFighter { get }
+}
+
+protocol AttackProtocol: PeopleProtocol {
+    func attacking() -> Int
+}
+
+enum TypeFighter {
+    case warrior
+    case mag
+}
+
+struct People: PeopleProtocol {
+    var name: String
+    var _strength: Int
+
+    init(name: String, strength: Int) {
+        self.name = name
+        self._strength = strength
+    }
+
+    func startTrainingFight() {
+        print("\(name) начал(а) тренировку боя.")
+    }
+}
+
+struct WarriorForProtocol: FighterProtocol, AttackProtocol {
+    func startTrainingFight() {
+        
+    }
+    
+    var name: String
+    var _strength: Int
+
+    var typeFighter: TypeFighter {
+        return .warrior
+    }
+
+    func attacking() -> Int {
+        return _strength * 2
+    }
+}
+
+struct MagForProtocol: FighterProtocol, AttackProtocol {
+    func startTrainingFight() {
+        
+    }
+    
+    var name: String
+    var _strength: Int
+
+    var typeFighter: TypeFighter {
+        return .mag
+    }
+
+    func attacking() -> Int {
+        return _strength * 3
+    }
+}
+
+let man = People(name: "Иван", strength: 10)
+let warrior = WarriorForProtocol(name: "Воин", _strength: 15)
+let mag = MagForProtocol(name: "Маг", _strength: 12)
+
+print("Человек: \(man.name), Сила: \(man._strength)")
+man.startTrainingFight()
+
+print("Воин: \(warrior.name), Сила: \(warrior._strength), Тип: \(warrior.typeFighter)")
+print("Атака воина: \(warrior.attacking())")
+
+print("Маг: \(mag.name), Сила: \(mag._strength), Тип: \(mag.typeFighter)")
+print("Атака мага: \(mag.attacking())")
