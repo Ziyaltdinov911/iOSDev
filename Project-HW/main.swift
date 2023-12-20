@@ -319,3 +319,162 @@ print("Атака воина: \(warrior.attacking())")
 
 print("Маг: \(mag.name), Сила: \(mag._strength), Тип: \(mag.typeFighter)")
 print("Атака мага: \(mag.attacking())")
+
+//Задача 3.1: Разработка и использование протоколов для представления людей и бойцов в игре
+//
+//Описание задачи:
+//
+//Вам предоставлена задача разработать протоколы для представления людей и бойцов в игровой системе. Каждый боец должен обладать уникальными характеристиками и методами. Ваша задача - определить протоколы, расширения и структуры, которые позволят корректно представить эти концепции.
+//
+//Требования:
+//
+//Протокол PeopleProtocol:
+//
+//Содержит свойства name (имя) и _strength (сила) с геттерами и сеттерами.
+//Определяет метод startTrainingFight(), выводящий сообщение о начале тренировки.
+//Протокол FighterProtocol:
+//
+//Требует реализации свойства typeFighter (тип бойца) типа TypeFighter.
+//Протокол AttackProtocol:
+//
+//Наследуется от PeopleProtocol.
+//Определяет метод attacking() -> Int, возвращающий урон бойца.
+//Перечисление TypeFighter:
+//
+//Структура People:
+//
+//Реализует протокол PeopleProtocol.
+//Содержит свойства name и _strength.
+//Структуры Warrior и Mag:
+//
+//Реализуют протоколы FighterProtocol и AttackProtocol.
+//Содержат свойства name и _strength.
+//Тестирование:
+//
+//Создайте экземпляры структур People, Warrior и Mag с различными характеристиками.
+//Выведите информацию о каждом созданном объекте.
+//Проверьте работу методов startTrainingFight() и attacking() для объектов, где это применимо.
+//Выведите информацию о типе бойцов и уроне, который они могут нанести.
+//Примечание:
+//
+//Обеспечьте, чтобы реализация протоколов и структур была логичной и соответствовала задаче.
+//Поддерживайте код в чистом и читаемом виде, следуя принципам объектно-ориентированного программирования.
+protocol FighterProtocol2 {
+    var name: String { get set }
+    var typeFighter: String { get }
+    var weapon: Weapon { get set }
+    var hp: Int { get set }
+    var strength: Int { get }
+    
+    func reduceDamage()
+    func attack()
+    func balanceHP()
+    func isDead() -> Bool
+}
+
+protocol Weapon {
+    var nameWeapon: String { get }
+    var owner: FighterProtocol2? { get set }
+}
+
+class Fighter2: FighterProtocol2 {
+    var name: String
+    var typeFighter: String {
+        return "какой-то боец"
+    }
+    var weapon: Weapon
+    private var _hp: Int = 0
+    
+    var hp: Int {
+        get { return _hp }
+        set {
+            _hp = newValue
+        }
+    }
+    
+    var strength: Int {
+        return 1
+    }
+    
+    init(name: String, hp: Int, weapon: Weapon) {
+        self.name = name
+        self.weapon = weapon
+        self.hp = hp
+    }
+    
+    func reduceDamage() {
+        let damage = strength * 10
+        print("нанес \(damage) урона")
+        _hp = max(0, _hp - damage)
+    }
+    
+    func attack() {
+        print("\(typeFighter), \(name), ударил и", terminator: " ")
+    }
+    
+    func balanceHP() {
+        print("Осталось жизней \(_hp)")
+    }
+    
+    func isDead() -> Bool {
+        return _hp <= 0
+    }
+    
+    deinit {
+        print("\(typeFighter) класс уничтожился")
+    }
+}
+
+protocol MagProtocol: FighterProtocol2 {
+    var strength: Int { get }
+}
+
+class Mag2: MagProtocol, FighterProtocol2 {
+    var typeFighter: String {
+        return "Mag"
+    }
+
+    var typeFighter2: TypeFighter
+    var name: String
+    var weapon: Weapon
+    private var _hp: Int = 100
+
+    var strength: Int {
+        return 50
+    }
+
+    var hp: Int {
+        get { return _hp }
+        set {
+            _hp = newValue
+        }
+    }
+
+    init(name: String, weapon: Weapon) {
+        self.name = name
+        self.weapon = weapon
+        self.typeFighter2 = .mag
+    }
+
+    func attack() {
+        if isDead() {
+            print("\(name) мертв")
+        } else {
+            print("\(typeFighter2), \(name), ударил и", terminator: " ")
+        }
+    }
+
+    func reduceDamage() {
+        let damage = strength * 10
+        print("нанес \(damage) урона")
+        _hp = max(0, _hp - damage)
+    }
+
+    func balanceHP() {
+        print("Осталось жизней \(_hp)")
+    }
+
+    func isDead() -> Bool {
+        return _hp <= 0
+    }
+}
